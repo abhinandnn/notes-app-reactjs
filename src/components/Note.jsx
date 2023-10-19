@@ -1,10 +1,11 @@
 import React from 'react'
 
-const Note = ({text}) => {
+const Note = ({id, text, deleteHandler}) => {
   return (
     <div className='note'>
-        <div>{text}</div>
+        <div className='note-body'>{text}</div>
         <div className='note_footer'>
+        <button className='note_save' onClick={() => deleteHandler(id)}>Delete</button> &nbsp;
         </div>
     </div>
   )

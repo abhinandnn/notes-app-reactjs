@@ -18,6 +18,11 @@ const Notes = () => {
         setInputText('');
     };
 
+    const deleteHandler = (id) => {
+        const newNotes = notes.filter((note) => note.id !== id);
+        setNotes(newNotes);
+    };
+
     return (
         <div className='notes'>
             {notes.map((note) => (
@@ -25,6 +30,7 @@ const Notes = () => {
                     key={note.id}
                     id={note.id}
                     text={note.text}
+                    deleteHandler={() => deleteHandler(note.id)}
                 />
             ))}
             <CreateNote

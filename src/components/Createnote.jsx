@@ -3,7 +3,7 @@ import React from 'react'
 
 const CreateNote = ({inputText, setInputText, saveHandler}) => {
     
-  return (
+return (
     <div className='note'>
         <textarea
         placeholder='Type...'
@@ -15,7 +15,7 @@ const CreateNote = ({inputText, setInputText, saveHandler}) => {
             <button className='note_save' onClick={saveHandler}>Save</button>
         </div>
     </div>
-  )
+)
 }
 
 export default CreateNote
