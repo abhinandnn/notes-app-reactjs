@@ -9,6 +9,7 @@ return (
         placeholder='Type...'
         value={inputText}
         onChange={(e) => setInputText(e.target.value)}
+        rows={5}
         >
         </textarea>
         <div className='note_footer'>
