@@ -5,17 +5,32 @@ import Note from './Note';
 const Notes = () => {
     const [inputText, setInputText] = useState('');
     const [notes, setNotes] = useState([]);
+    const [editNote, setEdit] = useState(null);
+
+    const editHandler = (id, text) => {
+        setEdit(id);
+        setInputText(text);
+    };
 
     const saveHandler = () => {
-        setNotes((prevNotes) => [
-            ...prevNotes,
-            {
-                id: Date.now(),
-                text: inputText,
-            },
-        ]);
+        if (editNote) {
+            setNotes((prevNotes) =>
+                prevNotes.map((note) =>
+                    note.id === editNote ? { ...note, text: inputText } : note
+                )
+            );
+        } else {
+            setNotes((prevNotes) => [
+                ...prevNotes,
+                {
+                    id: Date.now(),
+                    text: inputText,
+                },
+            ]);
+        }
 
-        setInputText('');
+        // setInputText('');
+        setEdit(null);
     };
 
     const deleteHandler = (id) => {
@@ -25,19 +40,32 @@ const Notes = () => {
 
     return (
         <div className='notes'>
-            {notes.map((note) => (
-                <Note
-                    key={note.id}
-                    id={note.id}
-                    text={note.text}
-                    deleteHandler={() => deleteHandler(note.id)}
+            {notes.map((note) =>
+                editNote === note.id ? (
+                    <CreateNote
+                        key={note.id}
+                        inputText={inputText}
+                        setInputText={setInputText}
+                        saveHandler={saveHandler}
+                    />
+                ) : (
+                    <Note
+                        key={note.id}
+                        id={note.id}
+                        text={note.text}
+                        editHandler={editHandler}
+                        deleteHandler={deleteHandler}
+                    />
+                )
+            )}
+            {editNote === null ? (
+                <CreateNote
+                    inputText={inputText}
+                    setInputText={setInputText}
+                    saveHandler={saveHandler}
                 />
-            ))}
-            <CreateNote
-                inputText={inputText}
-                setInputText={setInputText}
-                saveHandler={saveHandler}
-            />
+            ) :
+                null}
         </div>
     );
 };

@@ -23,7 +23,6 @@ body {
 }
 
 .note textarea {
-  white-space: pre-wrap;
   background: transparent;
   border: none;
   color: white;
@@ -70,5 +69,5 @@ body {
   margin: 0 auto;
   display: grid;
   grid-gap: 1em;
-  grid-template-columns: repeat(3, minmax(300px,1fr));
+  grid-template-columns: repeat(3, 300px);
 }
