@@ -15,27 +15,27 @@ const Notes = () => {
     
 
     const saveHandler = () => {
+        if(inputText){
         if (editNote) {
-            if(inputText){
+            
             setNotes((prevNotes) =>
                 prevNotes.map((note) =>
                     note.id === editNote ? { ...note, text: inputText } : note
                 )
-            );}
+            );
         } else {
-            if(inputText)
             {setNotes((prevNotes) => [
                 ...prevNotes,
                 {
                     id: Date.now(),
                     text: inputText,
                 },
-            ]);}
+            ]);
         }
         setNew(false);
         setInputText('');
         setEdit(null);
-    };
+    };}}
 
     const deleteHandler = (id) => {
         const newNotes = notes.filter((note) => note.id !== id);
@@ -80,7 +80,7 @@ const Notes = () => {
                         inputText={inputText}
                         setInputText={setInputText}
                         saveHandler={saveHandler}
-                    />):null}
+                    />):<></>}
         </div>
         </>
     );
